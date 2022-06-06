@@ -1,0 +1,85 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<br>
+<div class="container4">
+    <div class="container3">
+        <div class="container2">
+            <div id="con1">
+                {% if currentlot.lot_category.category == "smartfon" %}
+
+                <img src="{{ currentlot.lot_viewimage.lot_image.url}}" alt="{{ currentlot.lot_viewimage.titleimage }}"
+                    width="200px" height="296px">
+                {% elif currentlot.lot_category.category == "laptop" %}
+
+                <img src="{{ currentlot.lot_viewimage.lot_image.url}}" alt="{{ currentlot.lot_viewimage.titleimage }}"
+                    width="200px" height="200px">
+                {% else %}
+                <img src="{{ currentlot.lot_viewimage.lot_image.url}}" alt="{{ currentlot.lot_viewimage.titleimage }}"
+                    width="200px" height="296px">
+
+                {% endif %}
+
+            </div>
+            <div id="con2">
+                <h2>
+                    {{ currentlot.lot_name }}
+                </h2>
+                <p>
+                    <b>Price:</b> ${{ currentlot.lot_price }}
+                </p>
+                <p>
+                    <b>Description:</b> {{ currentlot.lot_description }}
+                </p>
+                <p id="date">
+                    <b>Date:</b> {{ currentlot.lot_date }}
+                </p>
+                <p>
+                    {% if currentlot.lot_status %}
+                <h6 id="open">Lot Open</h6>
+                {% else %}
+                <h6 id="close">Lot Close</h6>
+                {% endif %}
+                </p>
+                <p>
+                    {% if not user.is_authenticated %}
+                    Lot created by: (hidden) login pls!
+                    {% else %}
+                    Lot created by: <span id="author">{{ currentlot.lot_author }}</span>
+                    {% endif %}
+
+                </p>
+                <p>
+                    Lot category: {{ currentlot.lot_category }}
+                </p>
+            </div>
+            <div id="con3">
+                <p>
+                    <a class="btn btn-primary" href="{% url 'viewdetails' currentlot.id %}">View details >> </a>
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="container2">
+            <p>
+            <h3>Bid block</h3>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="containercomment">
+        <p>
+        <h3>Comment block</h3>
+        </p>
+        gggggggggggggggggggggggggggggggggggggggggggg
+    </div>
+
+</div>
+
+
+{% endblock %}
